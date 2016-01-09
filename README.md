@@ -5,7 +5,7 @@ FIRST : 'composer update'
 
 <a href="http://silex.sensiolabs.org/doc/web_servers.html" target="_new">web server configuration</a>
 in my case I was using apache and here's my configuration :
-
+``` 
 <VirtualHost *:80>
         ServerName silexexample.info
         DocumentRoot /var/www/silex/
@@ -23,7 +23,7 @@ in my case I was using apache and here's my configuration :
             </LimitExcept>
         </Directory>
 </VirtualHost>
-
+```
 Make sure to have "AllowOverride All" in the <directory> section to enable the .htaccess
 
 <a href="https://github.com/csanquer/PdoServiceProvider" target="_new">csanquer/ pdoServiceProvider</a>
