@@ -1,6 +1,6 @@
 <?php
 
-function createAccount($username, $password)
+function createAccount($username, $password, $pdo)
 {
     try {
         $pdo  = $app['pdo'];
@@ -19,14 +19,12 @@ function createAccount($username, $password)
     }
 }
 
-function changePassword($username, $password)
+function changePassword($username, $password, $pdo)
 {
     try {
-        $pdo  = $app['pdo'];
         // example of an UPDATE pdo request
         $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE username = :username");
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
-        
         // hash password before input in DB
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt->bindValue(':password', $hash);

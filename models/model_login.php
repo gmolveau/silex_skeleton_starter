@@ -1,22 +1,7 @@
 <?php
 
-function connect()
+function verifyPassword($username, $password, $pdo)
 {
-    // example of pdo usage 
-    $pdo = $app['pdo'];
-    try {
-        // example of pdo query
-        $all_users = $pdo->query("SELECT username FROM users;");
-        return $all_users; //renvoyer à la view
-    }
-    catch (PDOException $e) {
-        return ($e->getMessage());
-    }
-};
-
-function verifyPassword($username, $password)
-{
-    $pdo = $app['pdo'];
     try {
         // example of pdo prepared statement
         $stmt = $pdo->prepare("SELECT `password` FROM `users` WHERE `username` = :username");

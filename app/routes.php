@@ -8,10 +8,10 @@ $app->get('/', function() use ($app)
     
     // load the model
     require './models/model_index.php';
-    
+    $pdo=$app['pdo'];
     // use fonctions from that model
     $result = foo();
-    
+    $users = getAllUsers($pdo);
     // do stuff
     return $app['twig']->render('view_index.html.twig');
 });
@@ -38,11 +38,28 @@ $app->get('/{variable}', function($variable) use ($app)
     
     // want to redirect ?
     return $app->redirect('/myRedirection');
-    
-    // want to pass parameter to twig ?
+
+    // example with array
+    $products = Array
+    (
+        [0] => Array
+            (
+                [title] => 'shirt louis vuitton'
+                [price] => 149.99
+            )
+
+        [1] => Array
+            (
+                [title] => 'jean zarra'
+                [price] => 19.99
+            )
+    )
+
+    // want to pass multiple parameters to twig ?
     return $app['twig']->render('view_index.html.twig', array(
-        'content' => $content,
-        'title' => $title
+        'myArray' => $products, // use a for loop in your view
+        'content' => $content, // get it with {{ content }} in view_index.html.twig
+        'title' => $title // get it with {{ title }} 
     ));
 });
 
@@ -57,7 +74,7 @@ $app->post('/login', function() use ($app)
     $password = $app['request']->get('password');
     
     // example of use
-    if (verifyPassword($username, $password)) {
+    if (verifyPassword($username, $password, $pdo)) {
         return $app->redirect('/member');
     }
 });

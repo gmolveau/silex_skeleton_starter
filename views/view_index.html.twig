@@ -67,7 +67,13 @@
         <p>&copy; 2016 Company, Inc.</p>
       </footer>
     </div> <!-- /container -->
-
+    <!-- use myArray, example of for loop -->
+    {% for article in products %}
+      <span>
+        <h2>{{ article.title }}</h2>
+        <h1>{{ article.price }}</h1>
+      </span>
+    {% endfor %}
 {% endblock %}
 
 {% block foot %}
